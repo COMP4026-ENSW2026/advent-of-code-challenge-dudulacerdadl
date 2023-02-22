@@ -30,18 +30,27 @@ class PartI:
             destiny = rule[2] - 1
 
             moved = order[origin][qty:][::-1]
+            print('----------')
+            print(f'Qty: {qty}\nOrigin: {origin}\nDestiny: {destiny}\nMoved: {moved}')
+            print('----------')
+            if moved == []:
+                return
             for item in moved:
-                order[origin] = self.remove_from_array(order[origin], item)
+                order[origin].remove(item)
                 order[destiny].append(item)
 
         print(order)
         result = []
         for item in order:
-            result.append(item[-1])
+            if len(item) != 0:
+                result.append(item[-1])
+            else:
+                result.append(' ')
 
         return "".join(result)
 
     def set_rules(self, line):
+        line = line.rstrip().split(' ')
         numbers = []
         for string in line:
             if string.isdigit():
@@ -53,5 +62,6 @@ class PartI:
             array for array in origin_array if removed not in array
         ]
 
-part_i = PartI(open("sample.in"))
+part_i = PartI(open("input.txt"))
+# part_i = PartI(open("sample.in"))
 print(part_i.get_top_stack())
